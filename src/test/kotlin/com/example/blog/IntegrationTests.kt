@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient
 import org.springframework.boot.test.context.SpringBootTest
@@ -14,15 +15,18 @@ import org.springframework.test.web.servlet.client.expectBody
 * https://stackoverflow.com/questions/48918706/springboottest-webenvironment-when-is-mandatory-use-random-port-and-defined-por
 *
 * */
+
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
-class IntegrationTests (@Autowired val restClient: RestTestClient) {
+class IntegrationTests(@Autowired val restClient: RestTestClient) {
 
     @BeforeAll
-
+    fun setup() {
+        println(">> Setup")
+    }
 
     @Test
-    // use real sentences between backticks to provide expressive test function names
     fun `Assert blog page title, content and status code`() {
         println(">> Assert blog page title, content and status code")
         restClient.get().uri("/")
@@ -32,13 +36,13 @@ class IntegrationTests (@Autowired val restClient: RestTestClient) {
     }
 
     @Test
-    fun 'Assert article page title, content and status code'() {
+    fun `Assert article page title, content and status code`() {
         println(">> Assert article page title, content and status code")
         val title = "Lorem"
         restClient.get().uri("/article/${title.toSlug()}")
             .exchangeSuccessfully()
             .expectBody<String>()
-            .value {assertThat(it).contains(title, "Lorem", "dolor sit amet")}
+            .value { assertThat(it).contains(title, "Lorem", "dolor sit amet") }
     }
 
     @AfterAll
