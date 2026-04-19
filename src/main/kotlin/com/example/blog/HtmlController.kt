@@ -27,7 +27,7 @@ class HtmlController(
         model["banner"] = properties.banner
         // call the method on the **class**, not instance, not ArticleRepo but articleRepo
         model["articles"] = articleRepository.findAllByOrderByAddedAtDesc()
-            .map { it }
+            .map { it.render() }
         return "blog"
     }
 
