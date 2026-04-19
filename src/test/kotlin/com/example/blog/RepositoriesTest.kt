@@ -1,8 +1,11 @@
 package com.example.blog
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.data.jdbc.test.autoconfigure.DataJdbcTest
 import org.springframework.data.jdbc.core.mapping.AggregateReference
+import org.springframework.data.repository.findByIdOrNull
 
 @DataJdbcTest
 class RepositoriesTest @Autowired constructor(
