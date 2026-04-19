@@ -6,13 +6,11 @@ package com.example.blog
 * declaring at the same time the properties and the constructor parameters
 * */
 
-import org.h2.engine.User
-import org.springframework.context.annotation.Description
-import org.springframework.data.annotation.Id
-import org.springframework.data.jdbc.core.mapping.AggregateReference
-import org.springframework.data.relational.core.mapping.Column
-import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.jdbc.core.mapping.AggregateReference
 
 // @Table annotation maps the classes to the database tables, and @Column is used for FK relations
 // Spring Data JDBC uses `AggregateReference` to reference FK relatiosn, which only store IDs
