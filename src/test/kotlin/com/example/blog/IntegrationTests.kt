@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.client.expectBody
 *
 * */
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
 class IntegrationTests(@Autowired val restClient: RestTestClient) {
