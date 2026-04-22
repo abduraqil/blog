@@ -8,6 +8,11 @@ class BlogApplicationTests {
 
 	@Test
 	fun contextLoads() {
+
+		@Test
+		fun contextLoads() {
+
+		}
 	}
 
 }
