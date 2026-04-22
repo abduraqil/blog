@@ -6,14 +6,14 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.jdbc.core.mapping.AggregateReference
 
 // mark this as a spring config class (part of spring boot setup)
-// tell spring "run whatever beans are define dhere when the app starts"
+// tell spring "run whatever beans are defined here when the app starts"
 @Configuration
 class BlogConfiguration {
 
     // this creates a ban that runs right after your application starts
-    // basically, when app starts, execute this block below
+    // basically when the application starts it's going to execute this block below
     @Bean
-    fun databaseInitialzier(
+    fun databaseInitializer(
         userRepository: UserRepository,
         articleRepository: ArticleRepository
     ) = ApplicationRunner {
@@ -23,8 +23,10 @@ class BlogConfiguration {
                 title = "Lorem",
                 headline = "Lorem",
                 content = "dolor sit amet",
+                slug = "lorem",
                 author = AggregateReference.to(johnDoe.id!!)
             )
         )
+        println("Articles count: ${articleRepository.count()}")
     }
 }
