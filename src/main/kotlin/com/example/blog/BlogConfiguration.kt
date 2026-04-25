@@ -23,8 +23,17 @@ class BlogConfiguration {
                 title = "Lorem",
                 headline = "Lorem",
                 content = "dolor sit amet",
-                slug = "lorem",
+                //slug = "lorem",
                 author = AggregateReference.to(johnDoe.id!!)
+            )
+        )
+
+        articleRepository.save(
+            Article(
+                title = "Ipsum",
+                headline = "Ipsum",
+                content = "dolor sit amet",
+                author = AggregateReference.to(johnDoe.id)
             )
         )
         println("Articles count: ${articleRepository.count()}")
