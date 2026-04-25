@@ -7,6 +7,8 @@ import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 /* @Controller
@@ -64,6 +66,19 @@ class HtmlController(
         val author: User,
         val addedAt: String
     )
+}
+
+// implementing HTTP API via @RestController annotated controllers
+@RestController
+@RequestMapping("/api/user")
+class UserController(private val repository: UserRepository) {
+    @GetMapping("/")
+    fun findAll() = repository.findAll()
+
+    @GetMapping("/{login}")
+    fun findOne(@PathVariable login: String) =
+        repository.findByLogin(login)
+            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "This user does not exist!")
 }
 
 /*
